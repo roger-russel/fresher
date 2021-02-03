@@ -1,11 +1,11 @@
 package runner
 
 import (
-  "path/filepath"
 	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
+  "path/filepath"
 )
 
 func build() (string, bool) {
