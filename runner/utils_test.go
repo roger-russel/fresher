@@ -22,7 +22,7 @@ func TestIsWatchedFile(t *testing.T) {
 		actual := isWatchedFile(test.file)
 
 		if actual != test.expected {
-			t.Errorf("Expected %v, got %v", test.expected, actual)
+			t.Errorf("Expected %v for %v, got %v", test.expected, test.file, actual)
 		}
 	}
 }

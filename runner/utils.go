@@ -1,6 +1,7 @@
 package runner
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -54,8 +55,8 @@ func isIgnoredFolder(path string) bool {
 func isWatchedFile(path string) bool {
 	absolutePath, _ := filepath.Abs(path)
 	absoluteTmpPath, _ := filepath.Abs(tmpPath())
-
-	if strings.HasPrefix(absolutePath, absoluteTmpPath+"/") {
+	fmt.Println(absolutePath, absoluteTmpPath)
+	if strings.HasPrefix(absolutePath, absoluteTmpPath+string(filepath.Separator)) {
 		return false
 	}
 
@@ -73,7 +74,7 @@ func isWatchedFile(path string) bool {
 func shouldRebuild(eventName string) bool {
 	for _, e := range strings.Split(settings["no_rebuild_ext"], ",") {
 		e = strings.TrimSpace(e)
-		fileName := strings.Replace(strings.Split(eventName, ":")[0], `"`, "", -1)
+		fileName := strings.ReplaceAll(strings.Split(eventName, ":")[0], `"`, "")
 		if strings.HasSuffix(fileName, e) {
 			return false
 		}
